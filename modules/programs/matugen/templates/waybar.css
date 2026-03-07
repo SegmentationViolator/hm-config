@@ -1,0 +1,116 @@
+* {
+    font-family:  "Noto Sans Mono", "Font Awesome 7 Free";
+    font-size: 16px;
+    font-feature-settings: "tnum";
+}
+
+window#waybar {
+    background: transparent;
+    color: {{ colors.on_surface.default.hex }};
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: none;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+    transition-property: none;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: none;
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+    -gtk-icon-effect: none;
+    -gtk-icon-shadow: none;
+}
+
+tooltip {
+    background-color: {{ colors.background.default.rgba | set_alpha: 0.6 }};
+}
+
+#battery,
+#clock,
+#network,
+#tray,
+#wireplumber {
+    background-color: {{ colors.background.default.rgba | set_alpha: 0.6 }};
+    border-radius: 99px;
+    padding: 0 10px;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#battery {
+    border-radius: 0 99px 99px 0;
+    padding-left: 0;
+}
+
+#network {
+    border-radius: 99px 0 0 99px;
+    padding-right: 0;
+}
+
+#wireplumber {
+    border-radius: 0;
+    min-width: 24px;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#taskbar button {
+    background-color: {{ colors.background.default.rgba | set_alpha: 0.6 }};
+    padding: 0 5px;
+}
+
+#taskbar button:first-child {
+    border-bottom-left-radius: 99px;
+    border-top-left-radius: 99px;
+    padding-left: 10px;
+}
+
+#taskbar button:last-child {
+    border-bottom-right-radius: 99px;
+    border-top-right-radius: 99px;
+    padding-right: 10px;
+}
+
+#taskbar button:hover {
+    background-color: {{ colors.background.default.rgba | set_alpha: 0.6 | lighten: 20.0 }};
+}
+
+#taskbar button.active {
+    background-color: {{ colors.primary.default.rgba | set_alpha: 0.6 }};
+}
+
+#taskbar button.active:hover {
+    background-color: {{ colors.primary.default.rgba | set_alpha: 0.6 | lighten: 20.0 }};
+}
+
+#taskbar button box {
+    padding-left: 2px;
+}
+
+#tray {
+    margin-right: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: {{ colors.error.default.hex }};
+}
