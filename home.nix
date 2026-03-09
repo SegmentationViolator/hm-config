@@ -26,7 +26,6 @@ in
         ./modules/programs/direnv.nix
         ./modules/programs/gh.nix
         ./modules/programs/ghostty.nix
-        ./modules/programs/matugen
         ./modules/programs/waybar.nix
         ./modules/programs/stremio-service.nix
         ./modules/programs/zsh.nix
@@ -150,7 +149,21 @@ in
         };
     };
 
-    programs.matugen.wallpaper = wallpaper;
+    programs.matugen = {
+        inherit wallpaper;
+        enable = true;
+
+        templates = {
+            niri = {
+                input_path = "${./niri.kdl}";
+                output_path = "~/niri.kdl";
+            };
+            waybar = {
+                input_path = "${./waybar.css}";
+                output_path = "~/waybar.css";
+            };
+        };
+    };
 
     programs.nix-index.enable = true;
 
