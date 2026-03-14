@@ -51,15 +51,19 @@ in
     };
 
     home.packages = with pkgs; [
+        element-desktop
         feishin
+        halloy
         mpv
         nautilus
         nur.repos.forkprince.helium-nightly
         nvf-config.packages.${pkgs.stdenv.hostPlatform.system}.default
+        obs-studio
         swaybg
         vesktop
         wl-clipboard
         xdg-utils
+        zulip
 
         font-awesome
         monaspace
@@ -170,13 +174,13 @@ in
     programs.waybar.style = builtins.readFile (config.programs.matugen.theme.files + "/waybar.css");
 
     services.mako.settings = {
-        background-color = "${config.programs.matugen.theme.colors.on_primary.default.color}";
-        border-color = "${config.programs.matugen.theme.colors.tertiary_container.default.color}";
+        background-color = "#${config.programs.matugen.theme.colors.on_primary.default.color}";
+        border-color = "#${config.programs.matugen.theme.colors.tertiary_container.default.color}";
         icon-path = "${icon-theme}/share/icons/Papirus";
-        text-color = "${config.programs.matugen.theme.colors.tertiary.default.color}";
+        text-color = "#${config.programs.matugen.theme.colors.tertiary.default.color}";
 
         "urgency=high" = {
-            border-color = "${config.programs.matugen.theme.colors.error_container.default.color}";
+            border-color = "#${config.programs.matugen.theme.colors.error_container.default.color}";
         };
     };
 
