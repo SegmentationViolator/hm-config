@@ -51,6 +51,7 @@ in
     };
 
     home.packages = with pkgs; [
+        devenv
         element-desktop
         feishin
         halloy
