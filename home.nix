@@ -51,6 +51,7 @@ in
     };
 
     home.packages = with pkgs; [
+        codex
         devenv
         element-desktop
         feishin
