@@ -53,9 +53,7 @@ in
     home.packages = with pkgs; [
         codex
         devenv
-        element-desktop
         feishin
-        halloy
         mpv
         nautilus
         nur.repos.forkprince.helium-nightly
@@ -63,10 +61,10 @@ in
         obs-studio
         overskride
         swaybg
+        tor-browser
         vesktop
         wl-clipboard
         xdg-utils
-        zulip
 
         font-awesome
         monaspace
@@ -187,9 +185,22 @@ in
         };
     };
 
-    services.swww = {
-        enable = true;
-        extraArgs = [ "--no-cache" ];
+    systemd.user.services.awww-daemon = {
+        Install = {
+            WantedBy = [ "graphical-session.target" ];
+        };
+
+        Unit = {
+            ConditionEnvironment = "WAYLAND_DISPLAY";
+            Description = "An Answer to your Wayland Wallpaper Woes";
+            After = [ "graphical-session.target" ];
+            PartOf = [ "graphical-session.target" ];
+        };
+
+        Service = {
+            ExecStart = "${lib.getExe' pkgs.awww "awww-daemon"} --no-cache";
+            Restart = "on-failure";
+        };
     };
 
     systemd.user.services.set-wallpaper = {
@@ -199,13 +210,13 @@ in
 
         Unit = {
             ConditionEnvironment = "WAYLAND_DISPLAY";
-            Description = "Set Wallpaper Using swww";
-            After = [ "graphical-session.target" ];
+            Description = "Set Wallpaper Using awww";
+            After = [ "awww-daemon.service" ];
             PartOf = [ "graphical-session.target" ];
         };
 
         Service = {
-            ExecStart = "${lib.getExe' pkgs.swww "swww"} img --resize stretch --transition-type center ${wallpaper}";
+            ExecStart = "${lib.getExe' pkgs.awww "awww"} img --resize stretch --transition-type center ${wallpaper}";
             Restart = "on-failure";
         };
     };
