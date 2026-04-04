@@ -1,5 +1,7 @@
+/* Adapted from https://github.com/YaLTeR/dotfiles/blob/3600ae2db33aecfeee00201ac0fe5e584902c1f0/common/.config/waybar/style.css */
+
 * {
-    font-family:  "Noto Sans Mono", "Font Awesome 7 Free";
+    font-family: "Noto Sans Mono", "Font Awesome 7 Free";
     font-size: 16px;
     font-feature-settings: "tnum";
 }
@@ -53,6 +55,21 @@ tooltip {
 #battery {
     border-radius: 0 99px 99px 0;
     padding-left: 0;
+}
+
+#custom-mpris-scroll {
+    background-color: {{ colors.background.default.rgba | set_alpha: 0.6 }};
+    border-radius: 99px;
+    padding: 0 12px;
+    margin: 0 6px;
+}
+
+#custom-mpris-scroll.playing {
+    color: {{ colors.primary.default.rgb }};
+}
+
+#custom-mpris-scroll:hover {
+    background-color: {{ colors.background.default.rgba | set_alpha: 0.6 | lighten: 20.0 }};
 }
 
 #network {

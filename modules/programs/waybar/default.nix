@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, config, ... }:
 
 {
-    programs.waybar = {
+    config.programs.waybar = {
         enable = true;
 
         settings = [{
@@ -11,7 +11,7 @@
             margin-right = 4;
             margin-top = 4;
             modules-center = [ "clock" ];
-            modules-left = [ "wlr/taskbar" ];
+            modules-left = [ "wlr/taskbar" "custom/mpris-scroll" ];
             modules-right = [ "tray" "network" "wireplumber" "battery" ];
             spacing = 0;
 
@@ -26,6 +26,14 @@
             clock = {
                  format = "{:%e %B %R}";
                  tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            };
+
+            "custom/mpris-scroll" = {
+                exec =
+                    "${./mpris-scroll.sh}"
+                    + lib.optionalString (config.waybar.mpris.player != "")
+                        " ${lib.escapeShellArg config.waybar.mpris.player}";
+                return-type = "json";
             };
 
             network = {
@@ -58,5 +66,13 @@
         }];
 
         systemd.enable = true;
+    };
+
+    options = {
+        waybar.mpris.player = lib.mkOption {
+            description = "MPRIS player name (e.g. Feishin)";
+            type = lib.types.str;
+            default = "";
+        };
     };
 }

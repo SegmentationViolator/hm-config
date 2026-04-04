@@ -26,7 +26,7 @@ in
         ./modules/programs/direnv.nix
         ./modules/programs/gh.nix
         ./modules/programs/ghostty.nix
-        ./modules/programs/waybar.nix
+        ./modules/programs/waybar
         ./modules/programs/stremio-service.nix
         ./modules/programs/zsh.nix
         ./modules/services/mako.nix
@@ -60,6 +60,7 @@ in
         nvf-config.packages.${pkgs.stdenv.hostPlatform.system}.default
         obs-studio
         overskride
+        playerctl
         swaybg
         tor-browser
         vesktop
@@ -157,6 +158,7 @@ in
     programs.matugen = {
         inherit wallpaper;
         enable = true;
+        source_color_index = 0;
 
         templates = {
             niri = {
@@ -172,6 +174,7 @@ in
 
     programs.nix-index.enable = true;
 
+    waybar.mpris.player = "Feishin";
     programs.waybar.style = builtins.readFile (config.programs.matugen.theme.files + "/waybar.css");
 
     services.mako.settings = {
@@ -193,7 +196,6 @@ in
         Unit = {
             ConditionEnvironment = "WAYLAND_DISPLAY";
             Description = "An Answer to your Wayland Wallpaper Woes";
-            After = [ "graphical-session.target" ];
             PartOf = [ "graphical-session.target" ];
         };
 
@@ -244,11 +246,6 @@ in
     xdg.desktopEntries = {
         bottom = {
             name = "bottom";
-            noDisplay = true;
-        };
-
-        nixos-manual = {
-            name = "NixOS Manual";
             noDisplay = true;
         };
     };
