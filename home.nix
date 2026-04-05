@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nvf-config, ... }:
+{ config, lib, pkgs, ... }:
 
 let
 
@@ -58,6 +58,7 @@ in
         nautilus
         nur.repos.forkprince.helium-nightly
         obs-studio
+        ollama
         overskride
         playerctl
         swaybg
