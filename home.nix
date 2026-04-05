@@ -57,7 +57,6 @@ in
         mpv
         nautilus
         nur.repos.forkprince.helium-nightly
-        nvf-config.packages.${pkgs.stdenv.hostPlatform.system}.default
         obs-studio
         overskride
         playerctl

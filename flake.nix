@@ -28,13 +28,18 @@
             url = "github:SegmentationViolator/nvf-config";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        # whisp = {
+        #     url = "github:SegmentationViolator/Whisp";
+        #     inputs.nixpkgs.follows = "nixpkgs";
+        # };
     };
 
     outputs =
-        { nixpkgs, nur, home-manager, matugen, nix-index-database, nvf-config, ... }:
+        { nixpkgs, nur, home-manager, matugen, nix-index-database, nvf-config/*, whisp */, ... }:
         let
             system = "x86_64-linux";
-            pkgs = nixpkgs.legacyPackages.${system};
+            pkgs = import nixpkgs { inherit system; };
         in
         {
             homeConfigurations."ale" = home-manager.lib.homeManagerConfiguration {
@@ -45,6 +50,12 @@
                     matugen.nixosModules.default
                     nix-index-database.homeModules.default
                     nur.modules.homeManager.default
+                    (_: {
+                        home.packages = [
+                            nvf-config.packages.${system}.default
+                            # whisp.packages.${system}.default
+                        ];
+                    })
                 ];
 
                 extraSpecialArgs = { inherit nvf-config; };

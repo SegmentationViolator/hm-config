@@ -61,7 +61,7 @@ tooltip {
     background-color: {{ colors.background.default.rgba | set_alpha: 0.6 }};
     border-radius: 99px;
     padding: 0 12px;
-    margin: 0 6px;
+    margin: 0 0 0 8px;
 }
 
 #custom-mpris-scroll.playing {
