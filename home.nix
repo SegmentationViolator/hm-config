@@ -177,6 +177,11 @@ in
     waybar.mpris.player = "Feishin";
     programs.waybar.style = builtins.readFile (config.programs.matugen.theme.files + "/waybar.css");
 
+    services.awww = {
+        enable = true;
+        extraArgs = [ "--no-cache" ];
+    };
+
     services.mako.settings = {
         background-color = "#${config.programs.matugen.theme.colors.on_primary.default.color}";
         border-color = "#${config.programs.matugen.theme.colors.tertiary_container.default.color}";
@@ -188,23 +193,6 @@ in
         };
     };
 
-    systemd.user.services.awww-daemon = {
-        Install = {
-            WantedBy = [ "graphical-session.target" ];
-        };
-
-        Unit = {
-            ConditionEnvironment = "WAYLAND_DISPLAY";
-            Description = "An Answer to your Wayland Wallpaper Woes";
-            PartOf = [ "graphical-session.target" ];
-        };
-
-        Service = {
-            ExecStart = "${lib.getExe' pkgs.awww "awww-daemon"} --no-cache";
-            Restart = "on-failure";
-        };
-    };
-
     systemd.user.services.set-wallpaper = {
         Install = {
             WantedBy = [ "graphical-session.target" ];
@@ -213,7 +201,7 @@ in
         Unit = {
             ConditionEnvironment = "WAYLAND_DISPLAY";
             Description = "Set Wallpaper Using awww";
-            After = [ "awww-daemon.service" ];
+            After = [ "graphical-session.target" ];
             PartOf = [ "graphical-session.target" ];
         };
 
