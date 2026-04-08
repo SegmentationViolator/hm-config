@@ -11,8 +11,8 @@ let
     };
 
     wallpaper = pkgs.fetchurl {
-        url = "https://w.wallhaven.cc/full/1q/wallhaven-1q83qg.jpg";
-        hash = "sha256-QPmG4QTRvubuX6Fy5rmMwYKw4aQdBiH/zGL/PMmUZOk=";
+        url = "https://wallpapercave.com/download/green-yuri-wallpapers-wp15734325";
+        hash = "sha256-KbeeTPVbXM8Ah7RJ+8mnPw+qxU7MkRcfHbZoSWXPwTY=";
     };
 in
 {
@@ -58,7 +58,6 @@ in
         nautilus
         nur.repos.forkprince.helium-nightly
         obs-studio
-        ollama
         overskride
         playerctl
         swaybg
@@ -73,6 +72,7 @@ in
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
     ];
+
 
     home.pointerCursor =
         let
