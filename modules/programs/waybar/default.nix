@@ -30,9 +30,7 @@
 
             "custom/mpris-scroll" = {
                 exec =
-                    "${./mpris-scroll.sh}"
-                    + lib.optionalString (config.waybar.mpris.player != "")
-                        " ${lib.escapeShellArg config.waybar.mpris.player}";
+                    "${./mpris-scroll.sh} ${lib.escapeShellArg config.waybar.mpris.player}";
                 return-type = "json";
             };
 

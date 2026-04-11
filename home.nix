@@ -58,6 +58,7 @@ in
         nautilus
         nur.repos.forkprince.helium-nightly
         obs-studio
+        opencode
         overskride
         playerctl
         swaybg
