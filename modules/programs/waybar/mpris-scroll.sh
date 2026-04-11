@@ -37,7 +37,8 @@ resolve_player() {
     available="$(playerctl -l 2>/dev/null)" || return 1
     [[ -z "$available" ]] && return 1
 
-    if [[ -n "$requested_player" ]] && grep -Fxq "$requested_player" <<<"$available"; then
+    if [[ -n "$requested_player" ]]; then
+        grep -Fxq "$requested_player" <<<"$available" || return 1
         printf '%s\n' "$requested_player"
         return 0
     fi
