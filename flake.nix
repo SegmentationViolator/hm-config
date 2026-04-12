@@ -29,11 +29,6 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        llama-cpp = {
-            url = "github:TheTom/llama-cpp-turboquant";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
         # whisp = {
         #     url = "github:SegmentationViolator/Whisp";
         #     inputs.nixpkgs.follows = "nixpkgs";
@@ -41,7 +36,7 @@
     };
 
     outputs =
-        { nixpkgs, nur, home-manager, matugen, nix-index-database, nvf-config, llama-cpp/*, whisp */, ... }:
+        { nixpkgs, nur, home-manager, matugen, nix-index-database, nvf-config/*, whisp */, ... }:
         let
             system = "x86_64-linux";
             pkgs = import nixpkgs { inherit system; };
@@ -58,7 +53,6 @@
                     (_: {
                         home.packages = [
                             nvf-config.packages.${system}.default
-                            llama-cpp.packages.${system}.cuda
                             # whisp.packages.${system}.default
                         ];
                     })
